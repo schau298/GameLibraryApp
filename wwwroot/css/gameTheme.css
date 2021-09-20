@@ -1,0 +1,28 @@
+﻿body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color:lightblue;
+    color:black;
+}
+
+a{
+    color:navy;
+    text-decoration: none;
+    padding: 8px;
+}
+
+a:hover {
+    font-size: 1em;
+    text-decoration: none;
+    color:black;
+    text-shadow: 2px 2px 8px navy;
+    border-radius: 8px;
+}
+.nav-link:hover{
+    border-radius: 8px;
+    text-decoration:none;
+    background-color:coral;
+    color:black;
+}
+.nav-link {
+    color:lightblue !important;
+}
