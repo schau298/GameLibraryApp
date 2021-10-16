@@ -11,9 +11,16 @@ namespace GameLibraryApp.Models
     {
         public GamesContext(DbContextOptions<GamesContext> options) : base(options) { }
         public DbSet<Games> Games { get; set; }
+        public DbSet<Creator> Creators { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Creator>().HasData(
+                new Creator { CreatorId = "EG", Name = "Epic Games" },
+                new Creator{ CreatorId = "CD", Name = "CD Projekt Red" },
+                new Creator{ CreatorId = "MJ", Name = "Mojang Studios" },
+                new Creator{ CreatorId = "NE", Name = "Nintendo Entertainment" }
+                );
             modelBuilder.Entity<Games>().HasData(
                 new Games
                 {
@@ -21,7 +28,8 @@ namespace GameLibraryApp.Models
                     Name = "Cyberpunk",
                     Genre = "Action RPG",
                     Cost = 25,
-                    Platform = "Xbox"
+                    Platform = "Xbox",
+                    CreatorId = "CD"
                 },
                 new Games
                 {
@@ -29,7 +37,8 @@ namespace GameLibraryApp.Models
                     Name = "Minecraft",
                     Genre = "Adeventure",
                     Cost = 7,
-                    Platform = "Mobile"
+                    Platform = "Mobile",
+                    CreatorId = "MJ"
                 },   
                 new Games
                 {
@@ -37,7 +46,8 @@ namespace GameLibraryApp.Models
                     Name = "Fortnite",
                     Genre = "Battle Royale",
                     Cost = 0,
-                    Platform = "Playstation"
+                    Platform = "Playstation",
+                    CreatorId = "EG"
                 },     
              new Games
             {
@@ -45,7 +55,8 @@ namespace GameLibraryApp.Models
                 Name = "Mariokart",
                 Genre = "Racing",
                 Cost = 60,
-                Platform = "Nintendo Consoles"
+                Platform = "Nintendo Consoles",
+                CreatorId = "NE"
             }
                 );
         }

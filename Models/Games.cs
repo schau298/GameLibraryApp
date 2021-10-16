@@ -19,6 +19,9 @@ namespace GameLibraryApp.Models
         [Required(ErrorMessage ="Please enter the platform that you play on Xbox, PC, Mobile...")]
         public string Platform {get; set;}
 
+        [Required(ErrorMessage ="Please enter the name of the developer who created the game.")]
+        public string CreatorId { get; set; }
+        public Creator Creator { get; set; }
 
 
     }
