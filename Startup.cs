@@ -33,7 +33,7 @@ namespace GameLibraryApp
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            services.AddRazorPages();
+           //services.AddRazorPages();
             services.AddDbContext<GamesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRouting(options =>
             {
