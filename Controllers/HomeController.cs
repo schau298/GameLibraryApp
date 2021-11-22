@@ -1,4 +1,5 @@
 ﻿using GameLibraryApp.Models;
+using GameLibraryApp.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

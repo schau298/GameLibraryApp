@@ -3,7 +3,10 @@
     background-color:lightblue;
     color:black;
 }
-
+h1, h2 {
+    color: darkred;
+    text-shadow: 2px 2px 2px blue;
+}
 a{
     color:navy;
     text-decoration: none;

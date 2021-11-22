@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GameLibraryApp.Models;
+using GameLibraryApp.ViewModel;
 
 namespace GameLibraryApp.Controllers
 {
@@ -18,10 +19,56 @@ namespace GameLibraryApp.Controllers
             _context = context;
         }
 
-        // GET: Game
-        public async Task<IActionResult> Index()
+        public IActionResult GameReview()
         {
-            return View(await _context.Games.ToListAsync());
+            var data = new GamesViewModel
+            {
+                Games = _context.Games.ToList(),
+                Creator = _context.Creators.ToList(),
+                Ratings = _context.Ratings.ToList()
+            };
+            return View(data);
+        }
+        // GET: Game
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CostParm"] = sortOrder == "Cost" ? "cost_desc" : "Cost";
+            
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
+
+            var games = from g in _context.Games.Include(g => g.Creator)
+                        select g;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                games = games.Where(s => s.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    games = games.OrderByDescending(s => s.Name);
+                    break;
+                case "Cost":
+                    games = games.OrderBy(s => s.Cost);
+                    break;
+                case "cost_desc":
+                    games = games.OrderByDescending(s => s.Cost);
+                    break;
+                default:
+                    games = games.OrderBy(s => s.Name);
+                        break;
+            }
+            int pageSize = 2;
+            return View(await PaginatedList<Games>.CreateAsync(games.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Game/Details/5

@@ -12,9 +12,36 @@ namespace GameLibraryApp.Models
         public GamesContext(DbContextOptions<GamesContext> options) : base(options) { }
         public DbSet<Games> Games { get; set; }
         public DbSet<Creator> Creators { get; set; }
+        public DbSet<Ratings> Ratings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Ratings>().HasData(
+                new Ratings 
+                { 
+                 Rating = "It's got decent graphics and a fun, open world map to play on. Story missions can be buggy at times.", 
+                 RatingValue = 7,
+                 Name="Cyberpunk"
+                },
+                new Ratings
+                {
+                    Rating = "A wonderful game where you can let your creativity run wild. You can build whatever you want, explore, and survive.",
+                    RatingValue = 10,
+                    Name = "Minecraft"
+                },
+                new Ratings
+                { 
+                    Rating = "Nice graphics and combat but the skill differnce between players can make the game exhausting.",
+                    RatingValue = 6,
+                    Name = "Fortnite"
+                },
+                new Ratings
+                {
+                    Rating = "Classic Racing game and is defintiely a must play for anyone who enjoys mario or racing games.",
+                    RatingValue = 9,
+                    Name = "Mariokart"
+                }
+                );
             modelBuilder.Entity<Creator>().HasData(
                 new Creator { CreatorId = "EG", Name = "Epic Games" },
                 new Creator{ CreatorId = "CD", Name = "CD Projekt Red" },
