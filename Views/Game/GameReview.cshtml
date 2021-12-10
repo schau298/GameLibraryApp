@@ -5,39 +5,32 @@
 }
 
 <h1>@ViewBag.Title</h1>
-
-<table class=" table table-striped">
-    <thead>
-        <tr style="background-color:darkorange; font-weight:bold;box-shadow:3px 3px lightsteelblue">
-            <th>Game</th>
-            <th>Creator</th>
-            <th>Review</th>
-        <tr />
-    </thead>
-    <tbody>
-        <tr>
+   
             @foreach (Games games in Model.Games)
             {
 
-                <td>
-                    @Html.DisplayFor(modelItem => games.Name)
-                </td>
-                
+                <ul>
+                    <li>
+                        @Html.DisplayFor(modelItem => games.Name)
+                    </li>
+                </ul>
+
             }
             @foreach (Creator creator in Model.Creator)
             {
 
-                <td>
-                    @Html.DisplayFor(modelItem => creator.Name)
-                </td>
+                <ul>
+                    <li>
+                        @Html.DisplayFor(modelItem => creator.Name)
+                    </li>
+                </ul>
             }
             @foreach (Ratings ratings in Model.Ratings)
             {
 
-                <td>
-                    @Html.DisplayFor(modelItem => ratings.Rating)
-                </td>
+                <ul>
+                    <li>
+                        @Html.DisplayFor(modelItem => ratings.Rating)
+                    </li>
+                </ul>
             }
-        </tr>
-    </tbody>
-</table>

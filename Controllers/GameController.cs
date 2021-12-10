@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GameLibraryApp.Models;
 using GameLibraryApp.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameLibraryApp.Controllers
 {
+    [Authorize]
     public class GameController : Controller
     {
         private readonly GamesContext _context;
@@ -30,6 +32,7 @@ namespace GameLibraryApp.Controllers
             return View(data);
         }
         // GET: Game
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             ViewData["CurrentSort"] = sortOrder;
@@ -72,6 +75,7 @@ namespace GameLibraryApp.Controllers
         }
 
         // GET: Game/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

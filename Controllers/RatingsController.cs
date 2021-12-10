@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GameLibraryApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameLibraryApp.Controllers
 {
+    [Authorize]
     public class RatingsController : Controller
     {
         private readonly GamesContext _context;
@@ -19,12 +21,14 @@ namespace GameLibraryApp.Controllers
         }
 
         // GET: Ratings
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Ratings.ToListAsync());
         }
 
         // GET: Ratings/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
